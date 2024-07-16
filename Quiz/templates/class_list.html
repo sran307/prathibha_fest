@@ -1,0 +1,95 @@
+{% extends "menu.html" %}
+{% load static %}
+
+{% block bodycontent %}
+
+	<div class="content-wrapper">
+
+		<div class="card mb-3">
+			<img src="{% static 'assets/images/dashboard/people.svg' %}" class="card-img-top" alt="...">
+			<div class="card-img-overlay">
+				<h5 class="card-title fs-4">CLass List</h5>
+				<p class="card-text d-flex justify-content-end">
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewModal">
+						<b>
+							<i class="ti-plus  menu-icon">
+								Add</i>
+						</b>
+					</button>
+				</p>
+
+			</div>
+
+			<div class="card-body">
+
+				<table id="quizTable" class="display" style="width:100%;text-align:center !important;">
+					<thead>
+						<tr>
+							<th class="text-center">Slno</th>
+							<th class="text-center">Class</th>
+							<th class="text-center">Abbreviation</th>
+							<th class="text-center">Class Range</th>
+							<th class="text-center">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+                        {% for class in classlist %}
+						<tr>
+							<td class="text-center">{{forloop.counter}}</td>
+							<td class="text-center">{{class.class_level}}</td>
+							<td class="text-center">{{class.class_abbr}}</td>
+							<td class="text-center">{{class.class_range}}</td>
+							<td class="text-center">
+								<span class="badge bg-info text-dark editQuizton">
+									<i class="ti-pencil menu-icon text-light iconstyle">
+										Edit</i>
+								</span>
+							</td>
+						</tr>
+                        {% endfor %}
+					</tbody>
+				</table>
+
+
+			</div>
+		</div>
+	</div>
+
+
+	{# ------ Modal-------- #}
+	<!-- Button trigger modal -->
+
+
+	<!-- Modal -->
+		<div class="modal fade" id="addNewModal" tabindex="-1" aria-labelledby="addNewModalLabel" aria-hidden="true"> <div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="addNewModalLabel">Add new CLass
+					</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form class="row g-3 needs-validation formblockcontent" novalidate action = "{% url 'save_classlist' %}" method = "post" >
+                    {% csrf_token %}
+						<div class="mb-3">
+							<label for="exampleInputEmail1" class="form-label">Class Level</label>
+							<input type="text" class="form-control" name="class_level">
+						</div>
+						<div class="mb-3">
+							<label for="exampleInputEmail1" class="form-label">Abbreviation</label>
+							<input type="text" class="form-control" name="class_abbr">
+						</div>
+						<div class="mb-3">
+							<label for="exampleInputPassword1" class="form-label">Class Range</label>
+							<input type="text" class="form-control" name="class_range">
+						</div>
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="{% static 'projs/quiz_master.js' %}"></script>
+{% endblock %}

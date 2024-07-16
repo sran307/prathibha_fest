@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block header %}
+	<!-- navbar : base ending -->
+	<div
+		class="container-fluid page-body-wrapper">
+		<!-- header -->
+		<nav class="sidebar sidebar-offcanvas" id="sidebar">
+			<ul class="nav">
+				<li class="nav-item {% if menuactive == 'dashboard' %} active {% endif %}">
+					<a class="nav-link" href="{% url 'dashboard' %}">
+						<i class="icon-grid menu-icon"></i>
+						<span class="menu-title">Dashboard</span>
+					</a>
+				</li>
+
+				<li class="nav-item {% if menuactive == 'quizMaster' %} active {% endif %}">
+					<a class="nav-link" href="{% url 'quiz_master' %}">
+						<i class="ti-write  menu-icon"></i>
+						<span class="menu-title">Quiz Master</span>
+					</a>
+				</li>
+				<li class="nav-item {% if menuactive == 'classList' %} active {% endif %}">
+					<a class="nav-link" href="{% url 'classList' %}">
+						<i class="ti-id-badge  menu-icon"></i>
+						<span class="menu-title">Class List</span>
+					</a>
+				</li>
+
+
+			</ul>
+		</nav>
+		<!-- header -->
+
+		<div class="main-panel">
+
+                {% block bodycontent %}{% endblock %}
+
+			<footer class="footer">
+				<div class="d-sm-flex justify-content-center justify-content-sm-between">
+					<span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2024. The Creator - The God - 
+						<a href="#" target="_blank">The Brahmoski</a>
+						. All rights reserved.</span>
+					<span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with
+						<i class="ti-heart text-danger ms-1"></i>
+					</span>
+				</div>
+			</footer>
+		</div>
+	{% endblock %}
