@@ -26,14 +26,24 @@ def classList(request):
 
 def saveClasslist(request):
     data = request.POST
-    printoski(data)
-    classlvl = data.get('class_level')
-    class_abbr = data.get('class_abbr')
-    class_range = data.get('class_range')
+    classno = data.get('classno')
+    class_level = data.get('class_level')
+    class_level_abbr = data.get('class_level_abbr')
 
-    classlist = ClassList.objects.create(class_level=classlvl, class_abbr=class_abbr, class_range=class_range)
+    addeditType = data.get('addedit')
+    classid = data.get('classid')
+    if(addeditType=='add'):
+        ClassList.objects.create(classno=classno, class_level=class_level, class_level_abbr=class_level_abbr)
+    else:
+        classAvail = ClassList.objects.get(id=classid)
+        classAvail.classno = classno
+        classAvail.class_level = class_level
+        classAvail.class_level_abbr = class_level_abbr
+        classAvail.save()
     return HttpResponseRedirect(reverse('classList'))
 
 
 def printoski(data):
     print(data)
+
+

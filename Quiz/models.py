@@ -2,12 +2,26 @@ from django.db import models
 
 # Create your models here.
 class ClassList(models.Model):
+    classno = models.IntegerField(default=0,null=False)
     class_level = models.CharField(max_length=50)
-    class_abbr = models.CharField(max_length=20)
-    class_range = models.CharField(max_length=5)
+    class_level_abbr = models.CharField(max_length=5)
 
     class Meta:
         db_table = 'class_list'
 
     def __str__(self):
-        return f"{self.class_level}-{self.class_range}"
+        return f"{self.classno}-{self.class_level}"
+    
+
+class QuizMaster(models.Model):
+    classId = models.ForeignKey(ClassList, models.PROTECT, db_column='class_id')
+    image_Q = models.FileField(upload_to='\quizdocs')
+    audio_Q = models.FileField(upload_to='\quizdocs') 
+    video_Q = models.FileField(upload_to='\quizdocs') 
+    updated_on = models.DateTimeField()
+
+    class Meta:
+        db_table = 'quiz_master'
+
+    def __str__(self):
+        return f"{self.classId}-{self.id}"

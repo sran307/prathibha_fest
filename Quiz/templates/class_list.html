@@ -10,7 +10,7 @@
 			<div class="card-img-overlay">
 				<h5 class="card-title fs-4">CLass List</h5>
 				<p class="card-text d-flex justify-content-end">
-					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewModal">
+					<button type="button" class="btn btn-primary addClass" data-bs-toggle="modal" data-bs-target="#addNewModal">
 						<b>
 							<i class="ti-plus  menu-icon">
 								Add</i>
@@ -22,13 +22,13 @@
 
 			<div class="card-body">
 
-				<table id="quizTable" class="display" style="width:100%;text-align:center !important;">
+				<table id="classTable" class="display" style="width:100%;text-align:center !important;">
 					<thead>
 						<tr>
 							<th class="text-center">Slno</th>
-							<th class="text-center">Class</th>
-							<th class="text-center">Abbreviation</th>
-							<th class="text-center">Class Range</th>
+							<th class="text-center">Class No</th>
+							<th class="text-center">Class Level</th>
+							<th class="text-center">Class Level Abbreviation</th>
 							<th class="text-center">Action</th>
 						</tr>
 					</thead>
@@ -36,11 +36,11 @@
                         {% for class in classlist %}
 						<tr>
 							<td class="text-center">{{forloop.counter}}</td>
+							<td class="text-center">{{class.classno}}</td>
 							<td class="text-center">{{class.class_level}}</td>
-							<td class="text-center">{{class.class_abbr}}</td>
-							<td class="text-center">{{class.class_range}}</td>
+							<td class="text-center">{{class.class_level_abbr}}</td>
 							<td class="text-center">
-								<span class="badge bg-info text-dark editQuizton">
+								<span class="badge bg-info text-dark editClass" data-classid = {{class.id}}>
 									<i class="ti-pencil menu-icon text-light iconstyle">
 										Edit</i>
 								</span>
@@ -71,17 +71,19 @@
 				<div class="modal-body">
 					<form class="row g-3 needs-validation formblockcontent" novalidate action = "{% url 'save_classlist' %}" method = "post" >
                     {% csrf_token %}
+						<input type="hidden" name="addedit" id="id_addedit" value="add">
+						<input type="hidden" name="classid" id="id_classid">
+						<div class="mb-3">
+							<label for="exampleInputEmail1" class="form-label">Class</label>
+							<input type="text" class="form-control" name="classno">
+						</div>
 						<div class="mb-3">
 							<label for="exampleInputEmail1" class="form-label">Class Level</label>
 							<input type="text" class="form-control" name="class_level">
 						</div>
 						<div class="mb-3">
-							<label for="exampleInputEmail1" class="form-label">Abbreviation</label>
-							<input type="text" class="form-control" name="class_abbr">
-						</div>
-						<div class="mb-3">
-							<label for="exampleInputPassword1" class="form-label">Class Range</label>
-							<input type="text" class="form-control" name="class_range">
+							<label for="exampleInputPassword1" class="form-label">Class Level Abbreviation</label>
+							<input type="text" class="form-control" name="class_level_abbr">
 						</div>
 						<button type="submit" class="btn btn-primary">Submit</button>
 					</form>
@@ -91,5 +93,5 @@
 	</div>
 
 
-	<script src="{% static 'projs/quiz_master.js' %}"></script>
+	<script src="{% static 'projs/class_list.js' %}"></script>
 {% endblock %}
