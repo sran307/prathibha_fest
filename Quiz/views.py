@@ -1,8 +1,9 @@
 from django.shortcuts import render # type: ignore
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect # type: ignore
 from datetime import date
-from .models import ClassList
+from .models import ClassList,QuizMaster
 from django.urls import reverse  # type: ignore
+from django.utils import timezone # type: ignore
 
 # Create your views here.
 
@@ -14,8 +15,26 @@ def dashboard(request):
 
 
 def quizMaster(request):
-    context = {'menuactive':'quizMaster'}
+    classlist = ClassList.objects.values('class_level_abbr').distinct()
+    context = {'menuactive':'quizMaster', 'classlist':classlist}
     return render(request,'quiz_master.html',context)
+
+def quiztonList(request):
+    quizton = QuizMaster.objects.all()
+    context = {'quizton':quizton}
+    return render(request,'quizton_list.html',context)
+
+def saveQuizton(request):
+    try:
+        classLevel = request.POST.get('classLevel')
+        image = request.FILES.get('inputImage')
+        audio = request.FILES.get('inputAudio')
+        video = request.FILES.get('inputVideo')
+
+        QuizMaster.objects.create(classLevel=classLevel,image_Q=image,audio_Q=audio,video_Q=video, updated_on = timezone.now())
+        return JsonResponse({'status':200, 'msg':"Added successfully"})
+    except Exception as e:
+        return JsonResponse({'status':300, 'msg':"Some error occurred"})
 
 
 def classList(request):

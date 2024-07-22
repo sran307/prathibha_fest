@@ -14,10 +14,11 @@ class ClassList(models.Model):
     
 
 class QuizMaster(models.Model):
-    classId = models.ForeignKey(ClassList, models.PROTECT, db_column='class_id')
-    image_Q = models.FileField(upload_to='\quizdocs')
-    audio_Q = models.FileField(upload_to='\quizdocs') 
-    video_Q = models.FileField(upload_to='\quizdocs') 
+    # classId = models.ForeignKey(ClassList, models.PROTECT, db_column='class_id')
+    classLevel = models.CharField(max_length=5)
+    image_Q = models.FileField(upload_to='2024/quizdocs/image')
+    audio_Q = models.FileField(upload_to='2024/quizdocs/audio') 
+    video_Q = models.FileField(upload_to='2024/quizdocs/video') 
     updated_on = models.DateTimeField()
 
     class Meta:
