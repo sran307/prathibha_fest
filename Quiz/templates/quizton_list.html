@@ -1,0 +1,49 @@
+{% load custom_filter %}
+
+
+<table id="quizTable" class="display" style="width:100%;text-align:center !important;">
+	<thead>
+		<tr>
+			<th class="text-center">Year</th>
+			<th class="text-center">Class</th>
+			<th class="text-center">Image</th>
+			<th class="text-center">Audio</th>
+			<th class="text-center">Video</th>
+			<th class="text-center">Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for quizdata in quizton %}
+			<tr>
+				<td class="text-center">2024</td>
+				<td class="text-center">{{quizdata.classLevel}}</td>
+                <td class="text-center"><img src="{{quizdata.image_Q.url}}" width="100" height="100"></td>
+				<td class="text-center">
+					<i>{{quizdata.audio_Q|filenameonly}}<i><br>
+							<audio controls>
+								<source src="{{quizdata.audio_Q.url}}" type="audio/mpeg">
+								Your browser does not support the audio element.
+							</audio>
+						</td>
+						<td class="text-center">
+							<i>{{quizdata.video_Q|filenameonly}}<i><br>
+									<video width="200" height="100" controls>
+										<source src="{{quizdata.video_Q.url}}" type="video/mp4">
+										Your browser does not support the video tag.
+									</video>
+								</td>
+
+								<td class="text-center">
+									<span class="badge bg-info text-dark editQuizton">
+										<i class="ti-pencil menu-icon text-light iconstyle">
+											Edit</i>
+									</span>
+								</td>
+							</tr>
+						{% endfor  %}
+					</tbody>
+				</td>
+			</tr>
+		</table>
+	</tbody>
+

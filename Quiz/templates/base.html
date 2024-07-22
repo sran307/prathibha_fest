@@ -12,15 +12,21 @@
 		<link rel="stylesheet" href="{% static 'assets/vendors/feather/feather.css' %}">
 		<link rel="stylesheet" href="{% static 'assets/vendors/ti-icons/css/themify-icons.css' %}">
 		<link rel="stylesheet" href="{% static 'procss/bootstrap5.min.css' %}">
+		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
 		<link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
 		<link rel="stylesheet" href="{% static 'procss/datatable.css' %}">
+
 		<script src="{% static 'projs/bootstrap5.min.js' %}"></script>
 		<script src="{% static 'projs/jquery.js' %}"></script>
+		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 		<script src="{% static 'projs/datatable.js' %}"></script>
 		<script src="{% static 'assets/js/dashboard.js' %}"></script>
+		<script src="{% static 'projs/sweetalert.js' %}"></script>
 
 	</head>
 	<body>
+				<input type="hidden" value="{{csrf_token}}" id="csrf_token">
+
 		<div
 			class="container-scroller">
 			<!-- navbar : base beginning -->
@@ -121,7 +127,6 @@
 					</button>
 				</div>
 			</nav>
-
 
             {% block header %}{% endblock %}
 
