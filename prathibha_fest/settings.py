@@ -82,9 +82,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'prathibha_fest',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': '8271',
         'HOST': 'localhost',  # or the IP address if on a different machine
-        'PORT': '3310',  # or whatever port you chose
+        'PORT': '',  # or whatever port you chose
     }
 }
 
@@ -125,7 +125,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 # As the static dir is moved out of all apps the below loc should be included
-STATICFILES_DIRS = [  
+STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
