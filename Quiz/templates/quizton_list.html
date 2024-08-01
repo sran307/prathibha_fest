@@ -33,16 +33,21 @@
 							<source src="{{quizdata.audio_Q.url}}" type="audio/mpeg">
 						</audio>
 					{% else %}
-						NO media found
+						No Media found
 					{% endif %}
 			</td>
 			<td class="text-center video-container">
 				{# <i>{{quizdata.video_Q|filenameonly}}<i><br> #}
+					{% if quizdata.video_Q != '' %}
 						<video class="myVideo" width="200" height="100" controls>
 							<source src="{{quizdata.video_Q.url}}" type="video/mp4">
 							Your browser does not support the video tag.
 						</video>
 						<button class="play-button playButton">▶️Click to reveal</button>
+					{% else %}
+						No Media Found
+					{% endif %}
+
 			</td>
 
 			<td class="text-center">
@@ -75,4 +80,3 @@
 		</div>
 	</div>
 </div>
-
