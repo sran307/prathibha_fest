@@ -1,6 +1,8 @@
 {% load custom_filter %}
 
 
+
+
 <table id="quizTable" class="display" style="width:100%;text-align:center !important;">
 	<thead>
 		<tr>
@@ -14,36 +16,63 @@
 	</thead>
 	<tbody>
 		{% for quizdata in quizton %}
-			<tr>
-				<td class="text-center">2024</td>
-				<td class="text-center">{{quizdata.classLevel}}</td>
-                <td class="text-center"><img src="{{quizdata.image_Q.url}}" width="100" height="100"></td>
-				<td class="text-center">
-					<i>{{quizdata.audio_Q|filenameonly}}<i><br>
-							<audio controls>
-								<source src="{{quizdata.audio_Q.url}}" type="audio/mpeg">
-								Your browser does not support the audio element.
-							</audio>
-						</td>
-						<td class="text-center">
-							<i>{{quizdata.video_Q|filenameonly}}<i><br>
-									<video width="200" height="100" controls>
-										<source src="{{quizdata.video_Q.url}}" type="video/mp4">
-										Your browser does not support the video tag.
-									</video>
-								</td>
+		<tr>
+			<td class="text-center">2024</td>
+			<td class="text-center">{{quizdata.classLevel}}</td>
+			<td class="text-center">
+				{# <img src="{{quizdata.image_Q.url}}" width="100" height="100"> #}
+				<span class="badge bg-dark text-dark viewQuizImage" data-imageurl="{{quizdata.image_Q.url}}">
+					<i class="ti-eye menu-icon text-light iconstyle" >
+						View</i>
+				</span>
+			</td>
+			<td class="text-center">
+				{# <i>{{quizdata.audio_Q|filenameonly}}<i><br> #}
+					{% if quizdata.audio_Q != '' %}
+						<audio controls>
+							<source src="{{quizdata.audio_Q.url}}" type="audio/mpeg">
+						</audio>
+					{% else %}
+						NO media found
+					{% endif %}
+			</td>
+			<td class="text-center video-container">
+				{# <i>{{quizdata.video_Q|filenameonly}}<i><br> #}
+						<video class="myVideo" width="200" height="100" controls>
+							<source src="{{quizdata.video_Q.url}}" type="video/mp4">
+							Your browser does not support the video tag.
+						</video>
+						<button class="play-button playButton">▶️Click to reveal</button>
+			</td>
 
-								<td class="text-center">
-									<span class="badge bg-info text-dark editQuizton">
-										<i class="ti-pencil menu-icon text-light iconstyle">
-											Edit</i>
-									</span>
-								</td>
-							</tr>
-						{% endfor  %}
-					</tbody>
-				</td>
-			</tr>
-		</table>
+			<td class="text-center">
+				<span class="badge bg-info text-dark editQuizton">
+					<i class="ti-pencil menu-icon text-light iconstyle">
+						Edit</i>
+				</span>
+			</td>
+		</tr>
+		{% endfor %}
 	</tbody>
+</table>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="quizImageModal" tabindex="-1" aria-labelledby="quizImageModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-fullscreen">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="quizImageModalLabel">Picture Reel</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body" style="text-align:center">
+				<img id="quiz_image_body">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
 

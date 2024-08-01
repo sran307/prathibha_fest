@@ -2,76 +2,117 @@
 {% load static %}
 
 {% block bodycontent %}
-	<div class="content-wrapper">
-		<div class="row">
-			<div class="col-md-12 grid-margin">
-				<div class="row">
-					<div class="col-12 col-xl-8 mb-4 mb-xl-0">
-						<h3 class="font-weight-bold">Empowering Minds, Igniting <span class="text-primary"> Prathibha </span>!</h3>
-					</div>
+<style>
 
+</style>
 
-					<div class="col-12 col-xl-4">
-						<div class="justify-content-end d-flex">
-							<div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-								<button class="btn btn-sm btn-light bg-white " type="button" id="dropdownMenuDate2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-									<i class="mdi mdi-calendar"></i>
-									Today ({{today_date}})
-								</button>
-							</div>
-						</div>
-					</div>
+<div class="content-wrapper">
+	<div class="row">
+		<div class="col-md-12 grid-margin">
+			<div class="row">
+				<div class="col-12 col-xl-8 mb-4 mb-xl-0">
+					<h3 class="font-weight-bold typewriter-container" id="typewriter"></h3>
 				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-6 grid-margin stretch-card">
-				<div class="card tale-bg">
-					<div
-						class="card-people mt-auto">
-						{# <img src="{% static 'assets/images/dashboard/people.svg' %}" alt="people"> #}
-						<img src="{% static 'assets/images/pratibha_logo-enhanced.png' %}" alt="people">
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6 grid-margin transparent">
-				<div class="row">
-					<div class="col-md-6 mb-4 stretch-card transparent">
-						<div class="card card-tale">
-							<div class="card-body">
-								<p class="mb-4">Total Participants</p>
-								<p class="fs-30 mb-2 fw-bolder">48</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 mb-4 stretch-card transparent">
-						<div class="card card-dark-blue">
-							<div class="card-body">
-								<p class="mb-4">Total Events</p>
-								<p class="fs-30 mb-2 fw-bolder">18</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
-						<div class="card card-light-blue">
-							<div class="card-body">
-								<p class="mb-4">Number of Meetings</p>
-								<p class="fs-30 mb-2 fw-bolder">34040</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 stretch-card transparent">
-						<div class="card card-light-danger">
-							<div class="card-body">
-								<p class="mb-4">Number of Clients</p>
-								<p class="fs-30 mb-2 fw-bolder">47033</p>
-							</div>
+
+				<div class="col-12 col-xl-4">
+					<div class="justify-content-end d-flex">
+						<div class="dropdown flex-md-grow-1 flex-xl-grow-0">
+							<button class="btn btn-sm btn-light bg-white " type="button" id="dropdownMenuDate2"
+								data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								<i class="mdi mdi-calendar"></i>
+								Today ({{today_date}})
+							</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-md-6 grid-margin stretch-card">
+			<div class="card tale-bg">
+				<div class="card-people mt-auto">
+					{# <img src="{% static 'assets/images/dashboard/people.svg' %}" alt="people"> #}
+					<img src="{% static 'assets/images/pratibha_logo-enhanced.png' %}" alt="people">
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 grid-margin transparent">
+			<div class="row">
+				<div class="col-md-6 mb-4 stretch-card transparent">
+					<div class="card card-tale">
+						<div class="card-body">
+							<p class="mb-4">Total Participants</p>
+							<p class="fs-30 mb-2 fw-bolder">48</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 mb-4 stretch-card transparent">
+					<div class="card card-dark-blue">
+						<div class="card-body">
+							<p class="mb-4">Total Events</p>
+							<p class="fs-30 mb-2 fw-bolder">18</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
+					<div class="card card-light-blue">
+						<div class="card-body">
+							<p class="mb-4">Number of Meetings</p>
+							<p class="fs-30 mb-2 fw-bolder">34040</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 stretch-card transparent">
+					<div class="card card-light-danger">
+						<div class="card-body">
+							<p class="mb-4">Number of Clients</p>
+							<p class="fs-30 mb-2 fw-bolder">47033</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function () {
+		var text = 'Empowering Minds, Igniting Prathibha...!';
+		var i = 0;
+		var speed = 100; // Speed in milliseconds
+
+		function typeWriter() {
+			if (i < text.length) {
+				$('#typewriter').append(text.charAt(i));
+				i++;
+				setTimeout(typeWriter, speed);
+			} else {
+				// Wait before starting to delete the text
+				setTimeout(function () {
+					deleteWriter();
+				}, 1000); // Adjust the delay as needed
+			}
+		}
+
+		function deleteWriter() {
+			if (i > 0) {
+				var textContent = $('#typewriter').text();
+				$('#typewriter').text(textContent.substring(0, textContent.length - 1));
+				i--;
+				setTimeout(deleteWriter, speed-80);
+			} else {
+				// Wait before starting the typewriting effect again
+				setTimeout(function () {
+					typeWriter();
+				}, 1000); // Adjust the delay as needed
+			}
+		}
+
+		typeWriter();
+	});
+</script>
+
 {% endblock %}
