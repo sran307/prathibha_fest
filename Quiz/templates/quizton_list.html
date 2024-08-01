@@ -28,10 +28,13 @@
 			</td>
 			<td class="text-center">
 				{# <i>{{quizdata.audio_Q|filenameonly}}<i><br> #}
+					{% if quizdata.audio_Q != '' %}
 						<audio controls>
 							<source src="{{quizdata.audio_Q.url}}" type="audio/mpeg">
-							Your browser does not support the audio element.
 						</audio>
+					{% else %}
+						NO media found
+					{% endif %}
 			</td>
 			<td class="text-center video-container">
 				{# <i>{{quizdata.video_Q|filenameonly}}<i><br> #}
@@ -57,7 +60,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="quizImageModal" tabindex="-1" aria-labelledby="quizImageModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
+	<div class="modal-dialog modal-dialog-centered modal-fullscreen">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="quizImageModalLabel">Picture Reel</h5>

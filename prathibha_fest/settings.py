@@ -30,6 +30,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+MAX_UPLOAD_SIZE = 100000000
 
 # Application definition
 
